@@ -1,0 +1,34 @@
+# --- AMBIENTES VIRTUAIS E DEPENDÊNCIAS ---
+# Ignora as bibliotecas instaladas (elas são baixadas no deploy)
+backend/venv/
+backend/.venv/
+frontend/node_modules/
+node_modules/
+
+# --- SEGURANÇA E SEGREDOS (CRÍTICO) ---
+# Nunca envie suas chaves ou senhas para o GitHub
+.env
+backend/.env
+backend/firebase-key.json
+*.json
+# Se você tiver outras chaves .json no backend, a linha acima protege tudo
+
+# --- ARQUIVOS DE COMPILAÇÃO E IA ---
+# Ignora arquivos gerados automaticamente pelo Python
+__pycache__/
+backend/__pycache__/
+*.pyc
+# Ignora os modelos treinados (opcional, mas recomendado se forem grandes)
+backend/models/*.pkl
+
+# --- DISTRIBUIÇÃO E LOGS ---
+# Ignora a pasta de build do React e logs de erro
+frontend/dist/
+*.log
+npm-debug.log*
+
+# --- CONFIGURAÇÕES DE IDE E SISTEMA ---
+.vscode/
+.idea/
+.DS_Store
+.hintrc
