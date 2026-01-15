@@ -19,7 +19,7 @@ __pycache__/
 backend/__pycache__/
 *.pyc
 # Ignora os modelos treinados (opcional, mas recomendado se forem grandes)
-backend/models/*.pkl
+#backend/models/*.pkl
 
 # --- DISTRIBUIÇÃO E LOGS ---
 # Ignora a pasta de build do React e logs de erro
