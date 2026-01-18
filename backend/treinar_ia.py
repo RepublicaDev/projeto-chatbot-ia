@@ -53,7 +53,19 @@ dados = [
     ('histórico compras', 'Consulta'), ('saldo disponível', 'Consulta'), ('limite cartão', 'Consulta'),
     ('quanto sobrou', 'Consulta'), ('extrato mensal', 'Consulta'), ('conferir saldo', 'Consulta'),
     ('resumo conta', 'Consulta'), ('checar extrato', 'Consulta'), ('valor na conta', 'Consulta'),
-    ('saldo atualizado', 'Consulta'), ('consultar gastos', 'Consulta'), ('consulta', 'Consulta')
+    ('saldo atualizado', 'Consulta'), ('consultar gastos', 'Consulta'), ('consulta', 'Consulta'),
+
+    # SAUDAÇÃO / APRESENTAÇÃO (Exemplos)
+    ('quem é você?', 'Saudação'),
+    ('o que você faz?', 'Saudação'),
+    ('qual seu nome?', 'Saudação'),
+    ('como você pode me ajudar?', 'Saudação'),
+    ('você é um robô?', 'Saudação'),
+    ('olá', 'Saudação'),
+    ('bom dia', 'Saudação'),
+    ('boa tarde', 'Saudação'),
+    ('boa noite', 'Saudação'),
+    ('queria saber suas funções', 'Saudação')
 ]
 
 # Criar DataFrame
