@@ -70,15 +70,14 @@ async def responder_chat(mensagem: MensagemUsuario, authorization: str = Header(
     print(f"DEBUG - Msg: {mensagem.texto} | Categoria: {categoria}")
 
     respostas = {
-        'Pagamento': 'Para pagar, use o menu "Pagamentos" no app ou escaneie o código de barras com sua câmera.',
+        'Pagamento': 'Para pagar, use o menu "Pagamentos" no app ou escaneie o código de barras.',
         'Suporte': 'Nosso suporte técnico está online. Se o app travar, tente limpar o cache ou reinstalar.',
         'Reclamação': 'Lamentamos muito o transtorno. Registramos seu feedback e um analista irá revisar seu caso.',
         'Consulta': 'Seu saldo e extrato detalhado podem ser visualizados na tela principal do aplicativo.'
     }
     
-    # Busca a resposta baseada na categoria (case-sensitive com o dicionário acima)
-    reply = respostas.get(categoria, "Entendi sua dúvida, mas ainda estou aprendendo sobre isso. Pode detalhar melhor?")
-
+    # Use .strip() para garantir que não haja espaços invisíveis vindo da IA
+    reply = respostas.get(categoria.strip(), "Entendi sua dúvida, mas pode detalhar melhor?")
     # 7. SALVAR NO MONGODB
     log_interacao = {
         "usuario_id": usuario_id,

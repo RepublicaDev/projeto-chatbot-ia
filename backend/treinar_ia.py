@@ -62,8 +62,8 @@ df = pd.DataFrame(dados, columns=['texto', 'categoria'])
 # Criar Modelo com Pipeline (TF-IDF + Random Forest)
 # O TF-IDF ignora palavras comuns e foca nas que definem a categoria
 modelo_ia = make_pipeline(
-    TfidfVectorizer(),
-    RandomForestClassifier(n_estimators=100)
+    TfidfVectorizer(ngram_range=(1, 2)), # (1, 2) ensina a IA a ler grupos de até 2 palavras
+    RandomForestClassifier(n_estimators=200, random_state=42)
 )
 
 # Treinar
