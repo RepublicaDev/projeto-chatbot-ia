@@ -55,17 +55,17 @@ dados = [
     ('resumo conta', 'Consulta'), ('checar extrato', 'Consulta'), ('valor na conta', 'Consulta'),
     ('saldo atualizado', 'Consulta'), ('consultar gastos', 'Consulta'), ('consulta', 'Consulta'),
 
-    # SAUDAÇÃO / APRESENTAÇÃO (Exemplos)
-    ('quem é você?', 'Saudação'),
-    ('o que você faz?', 'Saudação'),
-    ('qual seu nome?', 'Saudação'),
-    ('como você pode me ajudar?', 'Saudação'),
-    ('você é um robô?', 'Saudação'),
-    ('olá', 'Saudação'),
-    ('bom dia', 'Saudação'),
-    ('boa tarde', 'Saudação'),
-    ('boa noite', 'Saudação'),
-    ('queria saber suas funções', 'Saudação')
+    # SAUDAÇÃO / APRESENTAÇÃO (Aumentando para 30 exemplos para ganhar peso)
+    ('quem é você?', 'Saudação'), ('o que você faz?', 'Saudação'), ('qual seu nome?', 'Saudação'),
+    ('como você pode me ajudar?', 'Saudação'), ('você é um robô?', 'Saudação'), ('olá', 'Saudação'),
+    ('bom dia', 'Saudação'), ('boa tarde', 'Saudação'), ('boa noite', 'Saudação'),
+    ('queria saber suas funções', 'Saudação'), ('ajuda aí', 'Saudação'), ('quem fala?', 'Saudação'),
+    ('apresente-se', 'Saudação'), ('quais são suas opções?', 'Saudação'), ('o que você sabe fazer?', 'Saudação'),
+    ('você é humano?', 'Saudação'), ('oi bot', 'Saudação'), ('eae', 'Saudação'), ('fala comigo', 'Saudação'),
+    ('me ajude', 'Saudação'), ('preciso de informações suas', 'Saudação'), ('quem é a ia?', 'Saudação'),
+    ('bot do banco', 'Saudação'), ('central de atendimento?', 'Saudação'), ('quais serviços você tem?', 'Saudação'),
+    ('funcionalidades', 'Saudação'), ('como funciona?', 'Saudação'), ('me explica o que você faz', 'Saudação'),
+    ('você ajuda em que?', 'Saudação'), ('saudação', 'Saudação')
 ]
 
 # Criar DataFrame
