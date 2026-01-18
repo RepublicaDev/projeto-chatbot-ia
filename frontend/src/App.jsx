@@ -131,7 +131,19 @@ function App() {
               </div>
               <div className="message-bubble">
                 {msg.text}
-                {msg.intent && <span className="intent-tag">{msg.intent}</span>}
+                {/* Adicione uma quebra de linha ou um estilo diferente para a tag */}
+                {msg.intent && (
+                  <div
+                    className="intent-tag"
+                    style={{
+                      fontSize: "0.7rem",
+                      opacity: 0.6,
+                      marginTop: "4px",
+                    }}
+                  >
+                    Categoria: {msg.intent}
+                  </div>
+                )}
               </div>
             </div>
           ))}

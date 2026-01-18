@@ -69,14 +69,21 @@ async def responder_chat(mensagem: MensagemUsuario, authorization: str = Header(
     texto_vet = vectorizer.transform([mensagem.texto])
     categoria = modelo.predict(texto_vet)[0]
     
+    # LOG para você ver no painel do Render o que a IA detectou
+    print(f"Mensagem: {mensagem.texto} | Categoria Detectada: {categoria}")
+
     respostas = {
         'Pagamento': 'Boleto disponível no app.',
         'Suporte': 'Tente reiniciar o app ou limpar o cache.',
         'Reclamação': 'Lamentamos o ocorrido. Registramos sua queixa.',
         'Consulta': 'Seu saldo atualizado está na tela de início.'
     }
-    reply = respostas.get(categoria, "Não entendi, pode repetir?")
+    
+    # Procura a resposta (usando .strip() para evitar espaços invisíveis)
+    # Se a IA prever 'Pagamento ' ou 'pagamento', o código abaixo trata melhor
+    reply = respostas.get(categoria, "Não entendi bem, mas vou encaminhar para um atendente.")
 
+    
     # 7. SALVAR NO MONGODB
     log_interacao = {
         "usuario_msg": mensagem.texto,
