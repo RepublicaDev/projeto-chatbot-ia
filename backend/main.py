@@ -9,10 +9,10 @@ from firebase_admin import credentials, auth
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 
-# 1. CARREGAR CONFIGURAÇÕES DO .ENV
+# 1. CARREGAR CONFIGURAÇÕES
 load_dotenv()
 
-# 2. CONFIGURAÇÃO FIREBASE (USA O .ENV)
+# 2. CONFIGURAÇÃO FIREBASE
 firebase_creds = {
     "type": "service_account",
     "project_id": os.getenv("FIREBASE_PROJECT_ID"),
@@ -21,7 +21,6 @@ firebase_creds = {
     "token_uri": "https://oauth2.googleapis.com/token",
 }
 
-# Inicializa o Firebase apenas se não tiver sido inicializado
 if not firebase_admin._apps:
     cred = credentials.Certificate(firebase_creds)
     firebase_admin.initialize_app(cred)
@@ -37,8 +36,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 4. CONFIGURAÇÃO DO BANCO DE DADOS (USA O .ENV)
-# No seu .env, coloque MONGODB_URL=sua_url_aqui
+# 4. CONFIGURAÇÃO MONGODB
 MONGO_URL = os.getenv("MONGODB_URL") 
 client = AsyncIOMotorClient(MONGO_URL)
 db = client.chatbot_db
@@ -57,35 +55,33 @@ async def responder_chat(mensagem: MensagemUsuario, authorization: str = Header(
         raise HTTPException(status_code=401, detail="Token ausente")
     
     try:
-        # Extrai o token removendo a palavra 'Bearer '
         token = authorization.split("Bearer ")[1]
-        # VALIDA o token com o Firebase
         decoded_token = auth.verify_id_token(token)
         usuario_id = decoded_token['uid']
     except Exception:
         raise HTTPException(status_code=401, detail="Token inválido")
 
     # 6. IA PROCESSA A MENSAGEM
-    texto_vet = vectorizer.transform([mensagem.texto])
-    categoria = modelo.predict(texto_vet)[0]
+    # Transforma o texto do usuário usando o vectorizer
+    texto_vet = vectorizer.transform([mensagem.texto.lower()])
+    # Predição
+    categoria = str(modelo.predict(texto_vet)[0])
     
-    # LOG para você ver no painel do Render o que a IA detectou
-    print(f"Mensagem: {mensagem.texto} | Categoria Detectada: {categoria}")
+    print(f"DEBUG - Msg: {mensagem.texto} | Categoria: {categoria}")
 
     respostas = {
-        'Pagamento': 'Boleto disponível no app.',
-        'Suporte': 'Tente reiniciar o app ou limpar o cache.',
-        'Reclamação': 'Lamentamos o ocorrido. Registramos sua queixa.',
-        'Consulta': 'Seu saldo atualizado está na tela de início.'
+        'Pagamento': 'Para pagar, use o menu "Pagamentos" no app ou escaneie o código de barras com sua câmera.',
+        'Suporte': 'Nosso suporte técnico está online. Se o app travar, tente limpar o cache ou reinstalar.',
+        'Reclamação': 'Lamentamos muito o transtorno. Registramos seu feedback e um analista irá revisar seu caso.',
+        'Consulta': 'Seu saldo e extrato detalhado podem ser visualizados na tela principal do aplicativo.'
     }
     
-    # Procura a resposta (usando .strip() para evitar espaços invisíveis)
-    # Se a IA prever 'Pagamento ' ou 'pagamento', o código abaixo trata melhor
-    reply = respostas.get(categoria, "Não entendi bem, mas vou encaminhar para um atendente.")
+    # Busca a resposta baseada na categoria (case-sensitive com o dicionário acima)
+    reply = respostas.get(categoria, "Entendi sua dúvida, mas ainda estou aprendendo sobre isso. Pode detalhar melhor?")
 
-    
     # 7. SALVAR NO MONGODB
     log_interacao = {
+        "usuario_id": usuario_id,
         "usuario_msg": mensagem.texto,
         "ia_intent": categoria,
         "ia_reply": reply,
