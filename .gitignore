@@ -10,7 +10,7 @@ node_modules/
 .env
 backend/.env
 backend/firebase-key.json
-*.json
+#*.json
 # Se você tiver outras chaves .json no backend, a linha acima protege tudo
 
 # --- ARQUIVOS DE COMPILAÇÃO E IA ---

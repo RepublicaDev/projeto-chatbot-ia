@@ -56,9 +56,9 @@ function App() {
     try {
       const token = await user.getIdToken();
       const response = await axios.post(
-        "https://projeto-chatbot-ia.onrender.com",
+        "https://projeto-chatbot-ia.onrender.com/chat",
         { texto: currentInput }, // Envia o texto correto
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
 
       // 2. Adiciona a resposta NOVA vinda do servidor

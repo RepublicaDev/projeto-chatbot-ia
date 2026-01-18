@@ -53,9 +53,17 @@ class MensagemUsuario(BaseModel):
 
 @app.post("/chat")
 async def responder_chat(mensagem: MensagemUsuario, authorization: str = Header(None)):
-    # VERIFICAÇÃO DE SEGURANÇA (Opcional, mas recomendado)
     if not authorization:
-        raise HTTPException(status_code=401, detail="Não autorizado")
+        raise HTTPException(status_code=401, detail="Token ausente")
+    
+    try:
+        # Extrai o token removendo a palavra 'Bearer '
+        token = authorization.split("Bearer ")[1]
+        # VALIDA o token com o Firebase
+        decoded_token = auth.verify_id_token(token)
+        usuario_id = decoded_token['uid']
+    except Exception:
+        raise HTTPException(status_code=401, detail="Token inválido")
 
     # 6. IA PROCESSA A MENSAGEM
     texto_vet = vectorizer.transform([mensagem.texto])
