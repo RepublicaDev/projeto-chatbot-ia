@@ -2,7 +2,7 @@
 
 ## 📌 Descrição
 
-Este é um sistema inteligente de triagem de atendimento que utiliza Machine Learning para classificar intenções de usuários e responder de forma automatizada. O projeto foi desenhado para ser escalável, integrando um motor de IA em Python com um ecossistema Full Stack moderno.
+Este é um sistema inteligente de triagem de atendimento bancário que utiliza Machine Learning para classificar intenções de usuários e responder de forma automatizada. O projeto foi desenhado para ser escalável, integrando um motor de IA em Python com um ecossistema Full Stack moderno.
 
 ## 🛠️ Tecnologias Principais
 
